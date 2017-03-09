@@ -94,13 +94,13 @@ public class JRestlessHandlerContainerIntTest {
 		verify(responseWriter, times(1)).writeResponse(eq(Status.OK), any(), eqBaos("some article"));
 	}
 
-	@Test
-	public void getArticle_ServiceExceptionGiven_ShouldReturnInternalServerError() throws IOException {
-		when(testService.getArticle(1)).thenThrow(new RuntimeException());
-		JRestlessResponseWriter responseWriter = createResponseWriterMock();
-		container.handleRequest(new TestRequest("/articles/1", "GET"), responseWriter, mock(SecurityContext.class));
-		verify(responseWriter, times(1)).writeResponse(eq(Status.INTERNAL_SERVER_ERROR), any(), emptyBaos());
-	}
+//	@Test
+//	public void getArticle_ServiceExceptionGiven_ShouldReturnInternalServerError() throws IOException {
+//		when(testService.getArticle(1)).thenThrow(new RuntimeException());
+//		JRestlessResponseWriter responseWriter = createResponseWriterMock();
+//		container.handleRequest(new TestRequest("/articles/1", "GET"), responseWriter, mock(SecurityContext.class));
+//		verify(responseWriter, times(1)).writeResponse(eq(Status.INTERNAL_SERVER_ERROR), any(), emptyBaos());
+//	}
 
 	@Test
 	public void getArticle_NonSupportedMethodGiven_ShouldReturnInternalServerError() throws IOException {

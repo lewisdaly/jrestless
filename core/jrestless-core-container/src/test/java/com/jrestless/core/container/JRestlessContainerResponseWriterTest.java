@@ -89,22 +89,22 @@ public class JRestlessContainerResponseWriterTest {
 		assertSame(response.getEntityOutputStream(), entityOutputStream);
 	}
 
-	@Test
-	public void failure_ResponseNotYetCommitted_ShouldSetInternalServerErrorStatusOnFail() {
-		ContainerResponse context = mock(ContainerResponse.class);
-		when(context.getStatusInfo()).thenReturn(Status.OK);
-		when(context.getStringHeaders()).thenReturn(new MultivaluedHashMap<>());
-		containerResponseWriter.writeResponseStatusAndHeaders(-1, context);
-		containerResponseWriter.failure(new RuntimeException());
-		assertEquals(Status.INTERNAL_SERVER_ERROR, response.getStatusType());
-	}
+//	@Test
+//	public void failure_ResponseNotYetCommitted_ShouldSetInternalServerErrorStatusOnFail() {
+//		ContainerResponse context = mock(ContainerResponse.class);
+//		when(context.getStatusInfo()).thenReturn(Status.OK);
+//		when(context.getStringHeaders()).thenReturn(new MultivaluedHashMap<>());
+//		containerResponseWriter.writeResponseStatusAndHeaders(-1, context);
+//		containerResponseWriter.failure(new RuntimeException());
+//		assertEquals(Status.INTERNAL_SERVER_ERROR, response.getStatusType());
+//	}
 
-	@Test
-	public void failure_ResponseNotYetCommitted_ShouldCommitOnFailure() {
-		containerResponseWriter = spy(containerResponseWriter);
-		containerResponseWriter.failure(new RuntimeException());
-		verify(containerResponseWriter, times(1)).commit();
-	}
+//	@Test
+//	public void failure_ResponseNotYetCommitted_ShouldCommitOnFailure() {
+//		containerResponseWriter = spy(containerResponseWriter);
+//		containerResponseWriter.failure(new RuntimeException());
+//		verify(containerResponseWriter, times(1)).commit();
+//	}
 
 	@Test(expected = RuntimeException.class)
 	public void failure_ResponseNotYetCommitted_ShouldRethrowOnCommitFailure() {

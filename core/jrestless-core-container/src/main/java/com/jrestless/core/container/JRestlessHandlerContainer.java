@@ -351,14 +351,9 @@ public class JRestlessHandlerContainer<RequestT extends JRestlessContainerReques
 
 		@Override
 		public void failure(Throwable error) {
+			/*If we catch exceptions here, we will never know they occoured!*/
 			LOG.error("container failure", error);
-			response.setStatusType(Status.INTERNAL_SERVER_ERROR);
-			try {
-				commit();
-			} catch (RuntimeException e) {
-				LOG.error("failed to commit failure", e);
-				throw e;
-			}
+			throw new RuntimeException(error);
 		}
 
 		@Override
