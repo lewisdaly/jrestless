@@ -38,6 +38,7 @@ import javax.ws.rs.core.SecurityContext;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.Binder;
 import org.glassfish.jersey.internal.MapPropertiesDelegate;
+import org.glassfish.jersey.internal.RuntimeDelegateImpl;
 import org.glassfish.jersey.server.ApplicationHandler;
 import org.glassfish.jersey.server.ContainerException;
 import org.glassfish.jersey.server.ContainerRequest;
@@ -352,12 +353,9 @@ public class JRestlessHandlerContainer<RequestT extends JRestlessContainerReques
 		@Override
 		public void failure(Throwable error) {
 			/*If we catch exceptions here, we will never know they occurred!*/
-			LOG.error("container failure", error);
-
-			LOG.error("Supressed Error", error.getSuppressed());
+			LOG.error("container failure");
 
 			if (error instanceof RuntimeException) {
-				System.out.println("Error is insance of RuntimeException!");
 				throw (RuntimeException) error;
 			}
 
