@@ -351,8 +351,17 @@ public class JRestlessHandlerContainer<RequestT extends JRestlessContainerReques
 
 		@Override
 		public void failure(Throwable error) {
-			/*If we catch exceptions here, we will never know they occoured!*/
+			/*If we catch exceptions here, we will never know they occurred!*/
 			LOG.error("container failure", error);
+
+			LOG.error("Supressed Error", error.getSuppressed());
+
+			if (error instanceof RuntimeException) {
+				System.out.println("Error is insance of RuntimeException!");
+				throw (RuntimeException) error;
+			}
+
+			//If we make a new exception here, we lose the original exception!
 			throw new RuntimeException(error);
 		}
 
